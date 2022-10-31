@@ -1,0 +1,43 @@
+server:
+  address:     ":8083"
+  maxHeaderBytes:    "20KB"
+#  openapiPath: "/api.json"
+#  swaggerPath: "/swagger"
+
+logger:
+  level : "info"
+  stdout: true
+  Path: "/var/log/OnchainParser/"
+
+database:
+  logger:
+    level: "all"
+    stdout: true
+    Path: "/var/log/OnchainParser/"
+  default:
+    link: "clickhouse://default:U2FsdGVkX1UPlSQvWBaj3drEU0Em357b4FOSLAC9M@127.0.0.1:9000/default?dial_timeout=200ms&max_execution_time=3"
+    type: "clickhouse"
+    charset: "utf8mb4"
+    maxIdle: "8"  #连接池最大闲置的连接数
+    maxOpen: "16"  #连接池最大打开的连接数
+    maxLifetime: "30s" #(单位秒)连接对象可重复使用的时间长度
+    debug: false
+
+
+# Redis 配置示例
+redis:
+  # 单实例配置示例1
+  default:
+    address: 127.0.0.1:6379
+    db: 0
+
+chain:
+  auth: 123456
+  blockNum: 30  #区块信息并发处理线程数
+  poolNum: 60  #交易信息并发处理线程数
+  onceLength : 30 #最新区块爬取任务，每次任务执行的高度
+  run:
+    name: boba
+    id: 288
+
+
